@@ -1,0 +1,31 @@
+dist/
+# Maven build output
+target/
+
+# Compiled Java classes
+*.class
+
+# JAR files (except resources)
+*.jar
+
+# Log files
+*.log
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# User configuration directory
+.scrcpy-gui/
+
+# Auto-push log file
+push-log.txt
+
+# Backup and temporary files
+*.bak
+*.tmp
