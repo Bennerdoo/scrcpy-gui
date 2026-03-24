@@ -1,10 +1,10 @@
-# Automated GitHub Push Script
-# This script will commit all changes and push to GitHub
-# Scheduled to run at 00:00:00 on January 1st, 2026
+# Automated GitHub Push Script - Simplified
+# Commits all changes and pushes to GitHub at midnight 2026
+# Remote: https://github.com/Bennerdoo/scrcpy-gui.git
 
 param(
     [string]$RepoPath = "c:\Users\Bennerdo\OneDrive\Documents\PROJECTS\scrcpy-master\gui",
-    [string]$CommitMessage = "🎉 New Year 2026 Release - Scrcpy GUI v1.1.0",
+    [string]$CommitMessage = "🎉 New Year 2026 Release - Scrcpy GUI v1.2.0",
     [string]$Branch = "main"
 )
 
@@ -21,81 +21,68 @@ function Write-Log {
 
 try {
     Write-Log "========================================="
-    Write-Log "Starting automated GitHub push script"
+    Write-Log "🎆 New Year 2026 GitHub Push 🎆"
     Write-Log "========================================="
+    Write-Log "Starting at: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+    Write-Log ""
     
     # Change to repository directory
     Set-Location -Path $RepoPath
-    Write-Log "Changed directory to: $RepoPath"
+    Write-Log "✓ Changed to repository: $RepoPath"
     
-    # Check if git repository exists
-    if (-not (Test-Path ".git")) {
-        Write-Log "ERROR: Not a git repository!"
-        Write-Log "Initializing git repository..."
-        git init
-        Write-Log "Git repository initialized"
-    }
+    # Stage all changes
+    Write-Log "📦 Staging all changes..."
+    git add . 2>&1 | ForEach-Object { Write-Log "  $_" }
+    Write-Log "✓ All files staged"
     
-    # Configure git user if not set
-    $gitUser = git config user.name
-    if ([string]::IsNullOrEmpty($gitUser)) {
-        Write-Log "Configuring git user..."
-        git config user.name "Bennerdoo"
-        git config user.email "benardmartinotieno@gmail.com"
-        Write-Log "Git user configured"
-    }
-    
-    # Add all files
-    Write-Log "Staging all changes..."
-    git add .
-    Write-Log "Files staged successfully"
-    
-    # Check if there are changes to commit
-    $status = git status --porcelain
-    if ([string]::IsNullOrEmpty($status)) {
-        Write-Log "No changes to commit"
-    } else {
-        Write-Log "Changes detected, committing..."
-        git commit -m "$CommitMessage"
-        Write-Log "Commit successful"
-    }
-    
-    # Check if remote exists
-    $remote = git remote get-url origin 2>&1
-    if ($LASTEXITCODE -ne 0) {
-        Write-Log "WARNING: No remote repository configured!"
-        Write-Log "Please run: git remote add origin <your-github-url>"
-        Write-Log "Script will exit. Please configure remote and run manually."
-        exit 1
-    }
-    
-    Write-Log "Remote repository: $remote"
-    
-    # Push to GitHub
-    Write-Log "Pushing to GitHub..."
-    Write-Log "Branch: $Branch"
-    
-    git push -u origin $Branch 2>&1 | ForEach-Object { Write-Log $_ }
+    # Commit changes
+    Write-Log "✍️ Creating commit..."
+    git commit -m "$CommitMessage" 2>&1 | ForEach-Object { Write-Log "  $_" }
     
     if ($LASTEXITCODE -eq 0) {
+        Write-Log "✓ Commit successful"
+    } else {
+        Write-Log "⚠️ No changes to commit (already up to date)"
+    }
+    
+    # Push to GitHub
+    Write-Log "📤 Pushing to GitHub..."
+    Write-Log "  Remote: https://github.com/Bennerdoo/scrcpy-gui.git"
+    Write-Log "  Branch: $Branch"
+    Write-Log ""
+    
+    git push -u origin $Branch 2>&1 | ForEach-Object { Write-Log "  $_" }
+    
+    if ($LASTEXITCODE -eq 0) {
+        Write-Log ""
         Write-Log "========================================="
-        Write-Log "✅ SUCCESS! Pushed to GitHub at $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+        Write-Log "✅ SUCCESS! Project is LIVE on GitHub!"
         Write-Log "========================================="
         Write-Log ""
         Write-Log "🎉 Happy New Year 2026! 🎉"
+        Write-Log "🚀 View at: https://github.com/Bennerdoo/scrcpy-gui"
+        Write-Log ""
         Write-Log "Made with Love by Bennerdoo ❤️"
+        Write-Log "========================================="
         
-        # Play a success sound (optional)
+        # Play a success sound
         [System.Media.SystemSounds]::Asterisk.Play()
     } else {
+        Write-Log ""
         Write-Log "========================================="
         Write-Log "❌ ERROR: Push failed!"
         Write-Log "========================================="
-        Write-Log "Please check your internet connection and GitHub credentials"
+        Write-Log "Common issues:"
+        Write-Log "  - No internet connection"
+        Write-Log "  - GitHub credentials not saved"
+        Write-Log "  - Repository access denied"
+        Write-Log ""
+        Write-Log "To fix: Run 'git push' manually and save credentials"
         exit 1
     }
     
 } catch {
+    Write-Log ""
     Write-Log "========================================="
     Write-Log "❌ EXCEPTION OCCURRED"
     Write-Log "========================================="

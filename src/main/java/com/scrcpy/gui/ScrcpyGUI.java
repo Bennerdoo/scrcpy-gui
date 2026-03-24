@@ -18,7 +18,7 @@ import java.util.List;
  * Main GUI application for scrcpy
  */
 public class ScrcpyGUI extends JFrame {
-    private static final String VERSION = "1.1.0";
+    private static final String VERSION = "1.2.0";
 
     // Panels
     private ConnectionPanel connectionPanel;

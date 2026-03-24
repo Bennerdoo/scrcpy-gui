@@ -50,8 +50,8 @@ mvn clean package
 ```
 
 This will create:
-- `target/scrcpy-gui-1.1.0.jar` - Simple JAR
-- `target/scrcpy-gui-1.1.0-jar-with-dependencies.jar` - Fat JAR with all dependencies
+- `target/scrcpy-gui-1.2.0.jar` - Simple JAR
+- `target/scrcpy-gui-1.2.0-jar-with-dependencies.jar` - Fat JAR with all dependencies
 
 ### Automated Builds with Jenkins
 
@@ -69,7 +69,7 @@ Quick setup:
 ### From JAR (Recommended)
 
 ```bash
-java -jar target/scrcpy-gui-1.1.0-jar-with-dependencies.jar
+java -jar target/scrcpy-gui-1.2.0-jar-with-dependencies.jar
 ```
 
 ### From Maven

@@ -30,7 +30,7 @@ package-exe.bat
 This script will:
 1. Build the fat JAR with bundled scrcpy
 2. Create a Windows installer using jpackage
-3. Output the installer to `dist\ScrcpyGUI-1.1.0.exe`
+3. Output the installer to `dist\ScrcpyGUI-1.2.0.exe`
 
 ### Option 2: Manual Steps
 
@@ -71,7 +71,7 @@ set "PATH=%JAVA_HOME%\bin;%PATH%"
 jpackage ^
     --type exe ^
     --name "ScrcpyGUI" ^
-    --app-version "1.1.0" ^
+    --app-version "1.2.0" ^
     --vendor "Scrcpy Community" ^
     --description "Graphical User Interface for scrcpy with bundled binaries" ^
     --input target ^
@@ -88,7 +88,7 @@ jpackage ^
 
 The packaging process creates:
 
-- `dist\ScrcpyGUI-1.1.0.exe` - Windows installer (~150-200 MB)
+- `dist\ScrcpyGUI-1.2.0.exe` - Windows installer (~150-200 MB)
 
 The installer will:
 - Install the application to Program Files
@@ -98,7 +98,7 @@ The installer will:
 
 ## Distribution
 
-Simply distribute the `ScrcpyGUI-1.1.0.exe` file. Users can:
+Simply distribute the `ScrcpyGUI-1.2.0.exe` file. Users can:
 1. Double-click the installer
 2. Follow the installation wizard
 3. Run ScrcpyGUI from the desktop shortcut or Start Menu

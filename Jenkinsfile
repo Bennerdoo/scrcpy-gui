@@ -8,7 +8,7 @@ pipeline {
     
     environment {
         PROJECT_NAME = 'ScrcpyGUI'
-        VERSION = '1.1.0'
+        VERSION = '1.2.0'
     }
     
     stages {

@@ -1,4 +1,5 @@
 dist/
+
 # Maven build output
 target/
 

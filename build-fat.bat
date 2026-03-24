@@ -15,17 +15,23 @@ REM Create output directories
 if not exist "target\classes" mkdir target\classes
 if not exist "target\lib" mkdir target\lib
 
-echo Step 1: Downloading Gson library...
+echo Step 1: Downloading libraries...
 echo ----------------------------------------
 if not exist "target\lib\gson-2.10.1.jar" (
     curl -L -o target\lib\gson-2.10.1.jar https://repo1.maven.org/maven2/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar
+)
+if not exist "target\lib\core-3.5.3.jar" (
+    curl -L -o target\lib\core-3.5.3.jar https://repo1.maven.org/maven2/com/google/zxing/core/3.5.3/core-3.5.3.jar
+)
+if not exist "target\lib\javase-3.5.3.jar" (
+    curl -L -o target\lib\javase-3.5.3.jar https://repo1.maven.org/maven2/com/google/zxing/javase/3.5.3/javase-3.5.3.jar
 )
 echo Done!
 echo.
 
 echo Step 2: Compiling Java sources...
 echo ----------------------------------------
-javac -d target\classes -cp "target\lib\gson-2.10.1.jar" ^
+javac -d target\classes -cp "target\lib\gson-2.10.1.jar;target\lib\core-3.5.3.jar;target\lib\javase-3.5.3.jar" ^
     src\main\java\com\scrcpy\gui\*.java ^
     src\main\java\com\scrcpy\gui\config\*.java ^
     src\main\java\com\scrcpy\gui\core\*.java ^
@@ -52,10 +58,12 @@ if exist "resources\scrcpy" (
 )
 echo.
 
-echo Step 4: Extracting Gson into classes...
+echo Step 4: Extracting libraries into classes...
 echo ----------------------------------------
 cd target\classes
 jar xf ..\lib\gson-2.10.1.jar
+jar xf ..\lib\core-3.5.3.jar
+jar xf ..\lib\javase-3.5.3.jar
 REM Remove META-INF to avoid conflicts
 if exist "META-INF" rmdir /s /q META-INF
 cd ..\..

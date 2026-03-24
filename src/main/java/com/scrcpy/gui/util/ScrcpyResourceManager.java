@@ -26,6 +26,19 @@ public class ScrcpyResourceManager {
     }
 
     /**
+     * Get the path to the adb executable.
+     * First tries to use bundled resources, falls back to system PATH.
+     */
+    public static String getAdbExecutable() {
+        if (extractedPath != null && Files.exists(extractedPath.resolve("adb.exe"))) {
+            return extractedPath.resolve("adb.exe").toString();
+        }
+        
+        // Fall back to system PATH
+        return "adb";
+    }
+
+    /**
      * Extract bundled scrcpy resources to a temporary directory
      */
     private static String extractBundledScrcpy() {
