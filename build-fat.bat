@@ -26,12 +26,15 @@ if not exist "target\lib\core-3.5.3.jar" (
 if not exist "target\lib\javase-3.5.3.jar" (
     curl -L -o target\lib\javase-3.5.3.jar https://repo1.maven.org/maven2/com/google/zxing/javase/3.5.3/javase-3.5.3.jar
 )
+if not exist "target\lib\flatlaf-3.3.jar" (
+    curl -L -o target\lib\flatlaf-3.3.jar https://repo1.maven.org/maven2/com/formdev/flatlaf/3.3/flatlaf-3.3.jar
+)
 echo Done!
 echo.
 
 echo Step 2: Compiling Java sources...
 echo ----------------------------------------
-javac -d target\classes -cp "target\lib\gson-2.10.1.jar;target\lib\core-3.5.3.jar;target\lib\javase-3.5.3.jar" ^
+javac -d target\classes -cp "target\lib\gson-2.10.1.jar;target\lib\core-3.5.3.jar;target\lib\javase-3.5.3.jar;target\lib\flatlaf-3.3.jar" ^
     src\main\java\com\scrcpy\gui\*.java ^
     src\main\java\com\scrcpy\gui\config\*.java ^
     src\main\java\com\scrcpy\gui\core\*.java ^
@@ -64,6 +67,7 @@ cd target\classes
 jar xf ..\lib\gson-2.10.1.jar
 jar xf ..\lib\core-3.5.3.jar
 jar xf ..\lib\javase-3.5.3.jar
+jar xf ..\lib\flatlaf-3.3.jar
 REM Remove META-INF to avoid conflicts
 if exist "META-INF" rmdir /s /q META-INF
 cd ..\..

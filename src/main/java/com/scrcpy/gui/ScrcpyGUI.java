@@ -8,9 +8,11 @@ import com.scrcpy.gui.panels.AllOptionsPanel;
 import com.scrcpy.gui.panels.ConnectionPanel;
 import com.scrcpy.gui.panels.VideoPanel;
 
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.*;
 import java.awt.*;
-//import java.io.File;
+import java.awt.event.ItemEvent;
 import java.io.IOException;
 import java.util.List;
 
@@ -34,7 +36,9 @@ public class ScrcpyGUI extends JFrame {
     private JButton stopButton;
     private JButton saveButton;
     private JButton loadButton;
+    private JButton RESET_BUTTON; //renaming to match consistency if needed, but keeping it as resetButton
     private JButton resetButton;
+    private JToggleButton themeToggle;
 
     // Core components
     private ConfigurationManager configManager;
@@ -82,15 +86,14 @@ public class ScrcpyGUI extends JFrame {
         allOptionsPanel = new AllOptionsPanel();
 
         // Create command display
-        commandTextArea = new JTextArea(3, 50);
+        commandTextArea = new JTextArea(1, 50); // Reduced to 1 row
         commandTextArea.setEditable(false);
-        commandTextArea.setLineWrap(true);
-        commandTextArea.setWrapStyleWord(true);
+        commandTextArea.setLineWrap(false); // No wrap for compact single line
         commandTextArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
         commandTextArea.setBorder(BorderFactory.createTitledBorder("Generated Command"));
 
         // Create output display
-        outputTextArea = new JTextArea(10, 50);
+        outputTextArea = new JTextArea(8, 50); // Reduced preferred rows to allow center to expand
         outputTextArea.setEditable(false);
         outputTextArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 11));
         outputTextArea.setBorder(BorderFactory.createTitledBorder("Output"));
@@ -108,6 +111,31 @@ public class ScrcpyGUI extends JFrame {
         saveButton = new JButton("Save Config");
         loadButton = new JButton("Load Config");
         resetButton = new JButton("Reset to Defaults");
+
+        // Theme toggle
+        themeToggle = new JToggleButton("Dark Mode");
+        themeToggle.addItemListener(e -> {
+            boolean isDark = (e.getStateChange() == ItemEvent.SELECTED);
+            setDarkMode(isDark);
+        });
+    }
+
+    private void setDarkMode(boolean dark) {
+        try {
+            if (dark) {
+                UIManager.setLookAndFeel(new FlatDarkLaf());
+                themeToggle.setText("Light Mode");
+            } else {
+                UIManager.setLookAndFeel(new FlatLightLaf());
+                themeToggle.setText("Dark Mode");
+            }
+            SwingUtilities.updateComponentTreeUI(this);
+            // Re-apply custom colors that might have been lost
+            startButton.setForeground(new Color(0, 128, 0));
+            stopButton.setForeground(new Color(192, 0, 0));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     private void setupLayout() {
@@ -144,11 +172,24 @@ public class ScrcpyGUI extends JFrame {
         buttonsPanel.add(saveButton);
         buttonsPanel.add(loadButton);
         buttonsPanel.add(resetButton);
+        buttonsPanel.add(themeToggle); // Add theme toggle here
 
-        // Combine bottom components
-        JPanel displayPanel = new JPanel(new GridLayout(2, 1, 5, 5));
-        displayPanel.add(commandPanel);
-        displayPanel.add(outputPanel);
+        // Combine bottom components with GridBagLayout for better space management
+        JPanel displayPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.insets = new Insets(0, 0, 5, 0);
+
+        // Command panel (top, compact)
+        gbc.gridy = 0;
+        gbc.weighty = 0.05; // Very small weight
+        displayPanel.add(commandPanel, gbc);
+
+        // Output panel (bottom, expands)
+        gbc.gridy = 1;
+        gbc.weighty = 0.95; // Takes most of the space in this panel
+        displayPanel.add(outputPanel, gbc);
 
         bottomPanel.add(displayPanel, BorderLayout.CENTER);
 
@@ -424,11 +465,16 @@ public class ScrcpyGUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        // Set look and feel to system default
+        // Set modern Look and Feel
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            FlatLightLaf.setup();
         } catch (Exception e) {
-            // Use default look and feel
+            // Fallback to system default
+            try {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            } catch (Exception ex) {
+                // Ignore
+            }
         }
 
         // Create and show GUI on Event Dispatch Thread
