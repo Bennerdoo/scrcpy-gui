@@ -122,8 +122,8 @@ After a successful build:
 1. Go to the build (e.g., Build #1)
 2. Click **Build Artifacts** on the left
 3. Download:
-   - `target/scrcpy-gui-1.2.0-jar-with-dependencies.jar`
-   - `dist/ScrcpyGUI-1.2.0.exe`
+   - `target/scrcpy-gui-1.3.0-jar-with-dependencies.jar`
+   - `dist/ScrcpyGUI-1.3.0.exe`
 
 ## Troubleshooting
 
@@ -183,7 +183,7 @@ Build artifacts are automatically saved and available for download:
 
 Available in pipeline:
 - `PROJECT_NAME`: ScrcpyGUI
-- `VERSION`: 1.2.0
+- `VERSION`: 1.3.0
 - `BUILD_NUMBER`: Jenkins build number
 - `BUILD_URL`: URL to build page
 
@@ -219,7 +219,7 @@ Add build parameters for flexible builds:
 1. In job configuration, check **This project is parameterized**
 2. Add **String Parameter**:
    - Name: `VERSION`
-   - Default Value: `1.2.0`
+   - Default Value: `1.3.0`
    - Description: Version to build
 3. Use in pipeline: `${params.VERSION}`
 

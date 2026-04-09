@@ -73,7 +73,7 @@ Enhancement suggestions are welcome! Please:
 3. **Test Your Changes**
    ```bash
    mvn clean package
-   java -jar target/scrcpy-gui-1.2.0-jar-with-dependencies.jar
+   java -jar target/scrcpy-gui-1.3.0-jar-with-dependencies.jar
    ```
    
    Test with various scrcpy configurations to ensure nothing breaks.

@@ -61,7 +61,7 @@ jpackage ^
     --type exe ^
     --icon ..\app\data\icon.ico ^
     --name "ScrcpyGUI" ^
-    --app-version "1.2.0" ^
+    --app-version "1.3.0" ^
     --vendor "Bennerdoo" ^
     --description "Graphical User Interface for scrcpy with bundled binaries - Made with Love by Bennerdoo" ^
     --input target ^
@@ -84,18 +84,18 @@ echo =============================================
 echo SUCCESS! Installer created
 echo =============================================
 echo.
-echo Installer location: dist\ScrcpyGUI-1.2.0.exe
+echo Installer location: dist\ScrcpyGUI-1.3.0.exe
 echo.
 
 REM Show file size
-for %%A in ("dist\ScrcpyGUI-1.2.0.exe") do (
+for %%A in ("dist\ScrcpyGUI-1.3.0.exe") do (
     set size=%%~zA
     set /a sizeInMB=!size! / 1048576
     echo Installer size: !sizeInMB! MB
 )
 
 echo.
-echo You can now distribute dist\ScrcpyGUI-1.2.0.exe
+echo You can now distribute dist\ScrcpyGUI-1.3.0.exe
 echo Users can install and run it without Java or scrcpy installed!
 echo.
 

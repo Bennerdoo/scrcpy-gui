@@ -4,7 +4,7 @@
 
 param(
     [string]$RepoPath = "c:\Users\Bennerdo\OneDrive\Documents\PROJECTS\scrcpy-master\gui",
-    [string]$CommitMessage = "🎉 New Year 2026 Release - Scrcpy GUI v1.2.0",
+    [string]$CommitMessage = "🎉 New Year 2026 Release - Scrcpy GUI v1.3.0",
     [string]$Branch = "main"
 )
 

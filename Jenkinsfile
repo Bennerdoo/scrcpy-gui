@@ -1,4 +1,4 @@
-pipeline {
+ pipeline {
     agent any
     
     tools {
@@ -8,7 +8,7 @@ pipeline {
     
     environment {
         PROJECT_NAME = 'ScrcpyGUI'
-        VERSION = '1.2.0'
+        VERSION = '1.3.0'
     }
     
     stages {
