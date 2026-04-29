@@ -6,6 +6,15 @@ A comprehensive Java Swing-based graphical user interface for [scrcpy](https://g
 
 This GUI provides an intuitive interface for all scrcpy command-line options, making it easy to configure and launch scrcpy without memorizing complex commands.
 
+## Advantages
+
+Using the Scrcpy GUI comes with significant benefits over the raw command-line interface:
+- **No Command Memorization**: Stop typing long strings of flags. Every scrcpy option is available visually.
+- **Error Reduction**: The UI automatically formats commands correctly, eliminating typos and syntax errors.
+- **Workflow Efficiency**: Save and load different configuration profiles for distinct devices or use cases.
+- **Real-Time Feedback**: View exactly what command is being executed and read the output logs directly within the app.
+- **Accessibility**: Lowers the barrier to entry for users who want to leverage scrcpy's powerful features but aren't comfortable with the terminal.
+
 ## Features
 
 - **Organized Options**: All scrcpy options organized into logical categories:
