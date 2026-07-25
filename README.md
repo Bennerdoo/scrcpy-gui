@@ -1,14 +1,19 @@
 # Scrcpy GUI
 
-A comprehensive Java Swing-based graphical user interface for [scrcpy](https://github.com/Genymobile/scrcpy).
+A comprehensive graphical user interface for [scrcpy](https://github.com/Genymobile/scrcpy) — mirror, record, and control your Android device with a single click.
+
+> **No setup required.** The installer bundles everything — scrcpy, Java runtime, and all dependencies. Just download and run.
 
 ## Overview
 
-This GUI provides an intuitive interface for all scrcpy command-line options, making it easy to configure and launch scrcpy without memorizing complex commands.
+Scrcpy GUI provides an intuitive, tabbed interface for every scrcpy option, making it easy to configure and launch scrcpy without memorizing complex commands. Download the app, open it, and you're ready to go.
+
+**[⬇️ Download the latest release](https://github.com/Bennerdoo/scrcpy-gui/releases/tag/Layout_update)**
 
 ## Advantages
 
 Using the Scrcpy GUI comes with significant benefits over the raw command-line interface:
+- **Zero Setup**: Everything is bundled in the installer — scrcpy, Java runtime, and all dependencies. No configuration required.
 - **No Command Memorization**: Stop typing long strings of flags. Every scrcpy option is available visually.
 - **Error Reduction**: The UI automatically formats commands correctly, eliminating typos and syntax errors.
 - **Workflow Efficiency**: Save and load different configuration profiles for distinct devices or use cases.
@@ -33,63 +38,19 @@ Using the Scrcpy GUI comes with significant benefits over the raw command-line i
 - **Process Output**: View scrcpy output in real-time
 - **Auto-save**: Last used configuration is automatically saved
 
-## Prerequisites
+## Installation
 
-1. **Java 11 or higher** installed
-2. **scrcpy** installed and available in your system PATH
-3. **Maven** (for building from source)
+### Windows (Recommended)
 
-### Installing scrcpy
+1. **[Download the `.exe` installer](https://github.com/Bennerdoo/scrcpy-gui/releases/tag/Layout_update)**
+2. Run the installer
+3. Launch **Scrcpy GUI** from the Start menu or desktop shortcut
 
-Follow the installation instructions for your platform:
-- **Windows**: https://github.com/Genymobile/scrcpy/blob/master/doc/windows.md
-- **Linux**: https://github.com/Genymobile/scrcpy/blob/master/doc/linux.md
-- **macOS**: https://github.com/Genymobile/scrcpy/blob/master/doc/macos.md
+That's it. The installer includes scrcpy, the Java runtime, and all required dependencies — no additional setup needed.
 
-Verify scrcpy is installed:
-```bash
-scrcpy --version
-```
+### Other Platforms (JAR)
 
-## Building
-
-```bash
-cd gui
-mvn clean package
-```
-
-This will create:
-- `target/scrcpy-gui-1.3.0.jar` - Simple JAR
-- `target/scrcpy-gui-1.3.0-jar-with-dependencies.jar` - Fat JAR with all dependencies
-
-### Automated Builds with Jenkins
-
-For automated continuous integration and deployment, see [JENKINS_SETUP.md](JENKINS_SETUP.md) for complete Jenkins configuration.
-
-Quick setup:
-1. Create Jenkins Pipeline job
-2. Point to `Jenkinsfile` in this directory
-3. Build automatically packages:
-   - JAR with dependencies
-   - Windows .exe installer (71 MB, includes Java runtime and scrcpy)
-
-## Running
-
-### From JAR (Recommended)
-
-```bash
-java -jar target/scrcpy-gui-1.3.0-jar-with-dependencies.jar
-```
-
-### From Maven
-
-```bash
-mvn exec:java -Dexec.mainClass="com.scrcpy.gui.ScrcpyGUI"
-```
-
-### From IDE
-
-Run the `com.scrcpy.gui.ScrcpyGUI` class
+A cross-platform JAR is also available on the [releases page](https://github.com/Bennerdoo/scrcpy-gui/releases/tag/Layout_update) for Linux and macOS.
 
 ## Usage
 
@@ -143,19 +104,40 @@ The default configuration (`default.json`) is automatically saved when you start
 
 ## Troubleshooting
 
-### "Failed to start scrcpy"
-- Make sure scrcpy is installed and in your PATH
-- Run `scrcpy --version` in terminal to verify
-- Check the output panel for specific error messages
-
 ### "No devices/emulators found"
-- Enable USB debugging on your Android device
-- Connect device via USB or set up TCP/IP connection
-- Run `adb devices` to verify device is recognized
+- Enable **USB Debugging** on your Android device (Settings → Developer Options)
+- Connect your device via USB or set up a TCP/IP wireless connection
+- Run `adb devices` in a terminal to verify your device is recognized
 
 ### Application won't start
-- Verify Java 11 or higher is installed: `java -version`
-- Make sure you're using the jar-with-dependencies version
+- Try re-downloading the installer from the [releases page](https://github.com/Bennerdoo/scrcpy-gui/releases/tag/Layout_update)
+- Make sure you're using the official `.exe` installer or the full JAR from the releases page
+
+### Laggy or low quality video
+- Lower Max Size to `1280` and reduce the bitrate
+- Switch codec from `h265` to `h264` for lower CPU usage
+- Check the **output panel** inside the app for detailed error messages
+
+## Building from Source
+
+> This section is for developers who want to contribute or build the app themselves.
+
+**Requirements:** Java 11+, Maven
+
+```bash
+cd gui
+mvn clean package
+```
+
+This creates:
+- `target/scrcpy-gui-1.3.0.jar` — Simple JAR
+- `target/scrcpy-gui-1.3.0-jar-with-dependencies.jar` — Fat JAR with all dependencies
+
+### Automated Builds with Jenkins
+
+For CI/CD setup, see [JENKINS_SETUP.md](JENKINS_SETUP.md). The pipeline automatically packages:
+- JAR with dependencies
+- Windows `.exe` installer (includes Java runtime and scrcpy)
 
 ## Keyboard Shortcuts
 
@@ -184,7 +166,11 @@ gui/
 
 ## Contributing
 
-This is a community-created GUI for scrcpy. For issues with scrcpy itself, please visit the [official scrcpy repository](https://github.com/Genymobile/scrcpy).
+This is a community-created GUI for scrcpy. Contributions of all kinds are welcome — code, documentation, testing, and feature suggestions.
+
+**[Open an issue or submit a pull request →](https://github.com/Bennerdoo/scrcpy-gui.git)**
+
+For issues with scrcpy itself, please visit the [official scrcpy repository](https://github.com/Genymobile/scrcpy).
 
 ## License
 
